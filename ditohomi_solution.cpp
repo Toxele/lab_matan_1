@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <iomanip>
 #define double long double
 #define endl '\n'
 using namespace std;
@@ -32,6 +33,7 @@ double ditohomy(double A, double B, double epsilon)
     int deg;
     cout << "Enter Polinomial deg \n";
     cin >> deg;
+    int iterations = 0;
     Polinomial polinom = Polinomial(deg);
     while (true)
     {
@@ -51,10 +53,12 @@ double ditohomy(double A, double B, double epsilon)
         double L2_power = (b_next - a_next);
         if(L2_power <= epsilon)
         {
+            cout << iterations << endl;
             return (a_next + b_next) / 2.0;
         }
         A = a_next;
         B = b_next;
+        iterations++;
     }
     return 0;
 }
@@ -71,5 +75,6 @@ void ditohomy_init()
 }
 int main()
 {
+    cout << fixed << setprecision(20);
     ditohomy_init();
 }
