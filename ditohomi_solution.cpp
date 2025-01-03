@@ -8,12 +8,12 @@ struct Polinomial
 {
     Polinomial() = default;
     vector<double> coefs;
-    Polinomial(int size)
+    Polinomial(int deg)
     {
-        this->coefs.resize(size, 0);
+        this->coefs.resize(deg + 1, 0);
         for(int i = 0; i < this->coefs.size(); i++)
         {
-            cout << "Enter coefficient № " << i + 1 << '\n';
+            cout << "Enter coefficient " << i + 1 << '\n';
             cin >> coefs[i];
         }
     }
@@ -29,9 +29,10 @@ struct Polinomial
 };
 double ditohomy(double A, double B, double epsilon)
 {
-    int size;
-    cout << "Enter Polinomial size \n";
-    Polinomial polinom = Polinomial(size);
+    int deg;
+    cout << "Enter Polinomial deg \n";
+    cin >> deg;
+    Polinomial polinom = Polinomial(deg);
     while (true)
     {
         double y = (A - epsilon + B) / 2.0;
@@ -66,6 +67,7 @@ void ditohomy_init()
     double epsilon;
     cout << "Enter epsilon \n";
     cin >> epsilon;
+    cout << ditohomy(A, B, epsilon);
 }
 int main()
 {
