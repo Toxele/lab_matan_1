@@ -2,45 +2,23 @@
 #include <cmath>
 #include <vector>
 #include <iomanip>
+#include "custom_functions.cpp"
 #define double long double
 #define endl '\n'
 using namespace std;
-struct Polinomial
-{
-    Polinomial() = default;
-    vector<double> coefs;
-    Polinomial(int deg)
-    {
-        this->coefs.resize(deg + 1, 0);
-        for(int i = 0; i < this->coefs.size(); i++)
-        {
-            cout << "Enter coefficient " << i + 1 << '\n';
-            cin >> coefs[i];
-        }
-    }
-    double calculate(double x)
-    {
-        double result = 0;
-        for(int i = 0; i < this->coefs.size(); i++)
-        {
-            result += coefs[i] * pow(x, i);
-        }
-        return result;
-    }
-};
+
 double ditohomy(double A, double B, double epsilon)
 {
     int deg;
-    cout << "Enter Polinomial deg \n";
+    cout << "Enter the highest degree of a polynomial \n";
     cin >> deg;
-    int iterations = 0;
     Polinomial polinom = Polinomial(deg);
+    double a_next = 0;
+    double b_next = 0;
     while (true)
     {
         double y = (A - epsilon + B) / 2.0;
         double z = (A + epsilon + B) / 2.0;
-        double a_next = 0;
-        double b_next = 0;
         if(polinom.calculate(y) <= polinom.calculate(z))
         {
             a_next = A;
@@ -53,12 +31,10 @@ double ditohomy(double A, double B, double epsilon)
         double L2_power = (b_next - a_next);
         if(L2_power <= epsilon)
         {
-            cout << iterations << endl;
             return (a_next + b_next) / 2.0;
         }
         A = a_next;
         B = b_next;
-        iterations++;
     }
     return 0;
 }
