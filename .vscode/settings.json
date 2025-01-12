@@ -7,6 +7,8 @@
         "cstdlib": "cpp",
         "fstream": "cpp",
         "xutility": "cpp",
-        "xlocmes": "cpp"
-    }
+        "xlocmes": "cpp",
+        "iomanip": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
