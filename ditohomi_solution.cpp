@@ -9,17 +9,20 @@ using namespace std;
 
 double ditohomy(double A, double B, double epsilon)
 {
-    int deg;
-    cout << "Enter the highest degree of a polynomial \n";
-    cin >> deg;
-    Polinomial polinom = Polinomial(deg);
+   
+    //Пример использования другой функции 
+    //cout << "Enter the highest degree of a polynomial \n";
+    //int deg;
+    //cin >> deg;
+    //Polinomial function = Polinomial(deg);
+    MiddleComplexityFunction function;
     double a_next = 0;
     double b_next = 0;
     while (true)
     {
         double y = (A - epsilon + B) / 2.0;
         double z = (A + epsilon + B) / 2.0;
-        if(polinom.calculate(y) <= polinom.calculate(z))
+        if(function.calculate(y) <= function.calculate(z))
         {
             a_next = A;
             b_next = z;

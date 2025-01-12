@@ -27,3 +27,11 @@ struct Polinomial
         return result;
     }
 };
+struct MiddleComplexityFunction
+{
+    MiddleComplexityFunction() = default;
+    double calculate(double x)
+    {
+        return pow(x - 2, 2) + sin(3 * x);
+    }
+};

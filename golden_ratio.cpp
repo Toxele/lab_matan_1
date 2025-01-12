@@ -12,15 +12,17 @@ double golden_ratio(double A, double B, double epsilon)
     // Начальные вычисления
     double y = A + ratio * (B - A);
     double z = A + B - y;
-    int deg;
-    cout << "Enter the highest degree of a polynomial \n";
-    cin >> deg;
-    Polinomial polinom = Polinomial(deg);
+    //Пример использования другой функции 
+    //cout << "Enter the highest degree of a polynomial \n";
+    //int deg;
+    //cin >> deg;
+    //Polinomial function = Polinomial(deg);
+    MiddleComplexityFunction function;
     while (true)
     {
         // Вычисляем значения функции в y и z
-        double f_y = polinom.calculate(y);
-        double f_z = polinom.calculate(z);
+        double f_y = function.calculate(y);
+        double f_z = function.calculate(z);
 
         if (f_y <= f_z)
         {
@@ -36,11 +38,10 @@ double golden_ratio(double A, double B, double epsilon)
             y = z;
             z = A + B - y;
         }
-
         if (abs(B - A) <= epsilon)
         {
             return (A + B) / 2.0;
-        }
+        }        
     }
     return 0;
 }
