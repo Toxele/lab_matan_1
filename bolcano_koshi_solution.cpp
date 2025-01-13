@@ -4,26 +4,27 @@
 #include <iomanip>
 #include "custom_functions.cpp"
 #define double long double
+#define INF 1e9
 #define endl '\n'
 using namespace std;
 const double epsilon = 0.0001;
+const double delta = 0.0002;
 double calculateStandardDeviation(double correctAnswer, double algorithmAnswer) {
     double mean = (correctAnswer + algorithmAnswer) / 2.0;
     double stdDev = sqrt((pow(correctAnswer - mean, 2) + pow(algorithmAnswer - mean, 2)) / 2.0);
     return stdDev;
 }
-double bolcano_koshi(double A, double B)
+int getSign(MiddleComplexityFunction &function, double &arg)
+{
+    return function.calculate(arg) >= 0 ? 1 : -1;
+}
+double bolcano_koshi(double A, double B, MiddleComplexityFunction &function)
 {  
-    cout << "Enter the highest degree of a polynomial \n";
-    int deg;
-    cin >> deg;
-    Polinomial function = Polinomial(deg);
-    int leftsign = function.calculate(A) >= 0 ? 1 : -1;
-    int rightsign = function.calculate(B) >= 0 ? 1 : -1;
+    int leftsign = getSign(function, A);
+    int rightsign = getSign(function, B);
     if(leftsign == rightsign)
     {
-        cout << "No roots on [" << A << ", " << B << ']' << '\n';
-        return 0;
+        return INF;
     }
     while (true)
     {
@@ -40,21 +41,43 @@ double bolcano_koshi(double A, double B)
         }
         if(abs(B - A) <= epsilon)
         {
-            cout << "Standard Deviation: " << calculateStandardDeviation(mid, 1) << endl;
             return mid;
         }
     }
     
-    return 0;
+    return INF;
+}
+void alg(double A, double B)
+{
+    vector<double> ans;
+    double bound = A + delta;
+    MiddleComplexityFunction function = MiddleComplexityFunction();
+    while (bound < B)
+    {
+        if(getSign(function, A) != getSign(function, bound))
+        {
+            ans.push_back(bolcano_koshi(A, bound, function));
+        }
+        A = bound;
+        bound += delta;
+    }
+    cout << "Roots: ";
+    for(int i = 0; i < ans.size(); i++)
+    {  
+        if(ans[i] != INF)
+        {
+            cout << ans[i] << ' ';
+        }
+    }
+    cout << '\n';
+    
 }
 void bolcano_koshi_init()
 {
     double A, B;
     cout << "Enter the left and right boundaries of the uncertainty  \n";
     cin >> A >> B;
-
-  
-    cout << bolcano_koshi(A, B);
+    alg(A, B);
 }
 int main()
 {

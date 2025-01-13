@@ -8,7 +8,8 @@
         "fstream": "cpp",
         "xutility": "cpp",
         "xlocmes": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "format": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
