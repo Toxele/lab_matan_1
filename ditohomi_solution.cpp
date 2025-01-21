@@ -6,7 +6,7 @@
 #define double long double
 #define endl '\n'
 using namespace std;
-
+const double error_rate = 0.01;
 double ditohomy(double A, double B, double epsilon)
 {
    
@@ -32,12 +32,13 @@ double ditohomy(double A, double B, double epsilon)
             b_next = B;
         }
         double L2_power = (b_next - a_next);
-        if(L2_power <= epsilon)
+        if(L2_power <= epsilon + error_rate)
         {
             return (a_next + b_next) / 2.0;
         }
         A = a_next;
         B = b_next;
+        cout << A << ' ' << B << L2_power << endl;
     }
     return 0;
 }
